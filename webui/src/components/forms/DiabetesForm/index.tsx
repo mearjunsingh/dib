@@ -1,5 +1,6 @@
 import React from 'react';
 import Label from '../../Label';
+import { Button } from '../../buttons';
 import { TextInput } from '../../inputs';
 
 const DiabetesForm = () => {
