@@ -61,7 +61,7 @@ const App = () => {
             <div className="mb-4">
               <Alert
                 severity={
-                  result.prediction === 1 ? 'success' : 'error'
+                  result.prediction === '0' ? 'success' : 'error'
                 }
               >
                 {result.message}

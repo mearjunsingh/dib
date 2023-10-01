@@ -25,8 +25,8 @@ class Item(BaseModel):
     bp: int
     st: int
     ins: int
-    bmi: int
-    dpf: int
+    bmi: float
+    dpf: float
     age: int
 
 @app.post("/predict")
@@ -38,6 +38,7 @@ def read_root(item: Item):
     input_data = [value for value in item.values()]
 
     predictions = model.predict([input_data])
+    print(predictions)
 
     if predictions[0] == 0:
         msg = 'The person is is not diabetic'
