@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Diabetes Prediction System</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-secondary">
+      <div class="container">
+        <a class="navbar-brand" href="/"
+          >Diabetes Prediction System</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse me-auto" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}"
+                >Diabetes Info</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'faqs' %}">Faqs</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="{% url 'diabetes-prediction' %}"
+                >Diabetes Prediction</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'hotline' %}"
+                >Hotline Numbers</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'resources' %}"
+                >Resources</a
+              >
+            </li>
+          </ul>
+
+          {% if user %}
+          <div class="ms-auto">
+            <a
+              href="{% url 'logout' %}"
+              class="btn btn-primary btn-sm me-2"
+              >Logout</a
+            >
+          </div>
+
+          {% else %}
+
+          <div class="ms-auto">
+            <a
+              href="{% url 'login' %}"
+              class="btn btn-primary btn-sm me-2"
+              >Login</a
+            >
+            <a
+              href="{% url 'signup' %}"
+              class="btn btn-primary btn-sm"
+              >Signup</a
+            >
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+    {% if messages %} {% for message in messages %}
+    <div id="message" class="container">
+      <div
+        class="alert alert-{{ message.tags }} alert-dismissible text-center"
+        role="alert"
+      >
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>
+          {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+          Error: {% else %} {{ message.tags|title }} {% endif %}
+        </strong>
+        {{ message }}
+      </div>
+    </div>
+    {% endfor %} {% endif %}
+
+    <!-- Accordion -->
+    <div class="container my-5">
+      <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              What Is a Diabetes Prediction System?
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse show"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              This FAQ provides an overview of diabetes prediction
+              systems, explaining their purpose, functionality, and
+              significance in healthcare. It addresses the fundamental
+              question of what these systems are and why they are
+              essential in the context of diabetes management and
+              prevention.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              How Do Diabetes Prediction Systems Work?
+            </button>
+          </h2>
+          <div
+            id="collapseTwo"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              This FAQ delves into the inner workings of diabetes
+              prediction systems, detailing the data sources,
+              algorithms, and machine learning techniques used to make
+              accurate predictions about an individual's diabetes
+              risk. It provides insights into the technology behind
+              these systems.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseThree"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              What Data Is Used in Diabetes Prediction Systems?
+            </button>
+          </h2>
+          <div
+            id="collapseThree"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              This FAQ explores the types of data collected and
+              analyzed by diabetes prediction systems, including
+              medical history, lifestyle factors, genetic markers, and
+              biomarkers like blood glucose levels. It discusses the
+              importance of data quality and relevance in making
+              reliable predictions.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="border p-4 text-center">
+      Copyright &copy; All rights reserved.
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

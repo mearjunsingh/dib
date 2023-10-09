@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Diabetes Prediction System</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-secondary">
+      <div class="container">
+        <a class="navbar-brand" href="/"
+          >Diabetes Prediction System</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse me-auto" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}"
+                >Diabetes Info</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'faqs' %}">Faqs</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="{% url 'diabetes-prediction' %}"
+                >Diabetes Prediction</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'hotline' %}"
+                >Hotline Numbers</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'resources' %}"
+                >Resources</a
+              >
+            </li>
+          </ul>
+
+          {% if user %}
+          <div class="ms-auto">
+            <a
+              href="{% url 'logout' %}"
+              class="btn btn-primary btn-sm me-2"
+              >Logout</a
+            >
+          </div>
+
+          {% else %}
+
+          <div class="ms-auto">
+            <a
+              href="{% url 'login' %}"
+              class="btn btn-primary btn-sm me-2"
+              >Login</a
+            >
+            <a
+              href="{% url 'signup' %}"
+              class="btn btn-primary btn-sm"
+              >Signup</a
+            >
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+    {% if messages %} {% for message in messages %}
+    <div id="message" class="container">
+      <div
+        class="alert alert-{{ message.tags }} alert-dismissible text-center"
+        role="alert"
+      >
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>
+          {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+          Error: {% else %} {{ message.tags|title }} {% endif %}
+        </strong>
+        {{ message }}
+      </div>
+    </div>
+    {% endfor %} {% endif %}
+
+    <section class="my-5">
+      <div class="container">
+        <h2>About Diabetes</h2>
+        <p>
+          A diabetes prediction system represents a cutting-edge
+          healthcare tool that harnesses the capabilities of advanced
+          machine learning algorithms to comprehensively evaluate an
+          individual's risk of developing diabetes in the future. It
+          operates by assimilating a wide array of data sources,
+          including electronic health records, patient-provided
+          lifestyle information, genetic predisposition factors, and
+          pertinent biomarkers like fasting blood glucose levels.
+        </p>
+
+        <p>
+          Through the application of sophisticated machine learning
+          techniques, including logistic regression, decision trees,
+          support vector machines, and neural networks, these systems
+          conduct a thorough and intricate analysis of the collected
+          data. This in-depth examination reveals intricate patterns
+          and intricate relationships within the data, enabling the
+          system to make highly accurate predictions regarding an
+          individual's probability of developing diabetes over time.
+        </p>
+
+        <p>
+          The information derived from these predictions holds immense
+          potential for individuals, as it empowers them to make
+          informed decisions about their health. Armed with
+          personalized risk assessments, individuals can proactively
+          engage in preventive measures such as adopting healthier
+          lifestyles, modifying their diets, increasing physical
+          activity, and maintaining regular monitoring of their blood
+          sugar levels. In cases where elevated risk is detected,
+          timely intervention and medical consultation can be sought,
+          thus potentially averting the onset of diabetes or
+          effectively managing the condition from an early stage.
+        </p>
+
+        <p>
+          Furthermore, the utility of diabetes prediction systems
+          extends beyond individual healthcare. Healthcare providers,
+          medical institutions, and public health organizations can
+          harness these predictive capabilities to enhance their
+          services and public health initiatives. By identifying
+          high-risk populations within their patient cohorts,
+          healthcare providers can offer targeted and personalized
+          care, thereby improving patient outcomes and optimizing
+          healthcare resource allocation. In the broader context of
+          public health, these systems facilitate the identification
+          of at-risk communities, guiding the development of
+          preventive interventions and health education programs aimed
+          at reducing the incidence of diabetes on a larger scale.
+        </p>
+
+        <p>
+          However, it is essential to emphasize that while diabetes
+          prediction systems hold great promise, they are not without
+          their challenges and ethical considerations. Data quality,
+          model accuracy, data privacy, and security must all be
+          carefully managed to ensure the responsible and effective
+          use of these systems. Collaboration between healthcare
+          professionals, data scientists, and technology experts is
+          crucial to address these complexities and maximize the
+          benefits of diabetes prediction systems for both individuals
+          and society at large.
+        </p>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="border p-4 text-center">
+      Copyright &copy; All rights reserved.
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
