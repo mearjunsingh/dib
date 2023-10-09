@@ -1,10 +1,10 @@
+from pathlib import Path
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 import joblib
 
 
-# Create your views here.
 def index(request):
     return render(
         request,
@@ -94,6 +94,7 @@ def diabetes_prediction(request):
 
 
 def result(request):
+    context = {}
     if request.method == "POST":
         pg = request.POST["pg"]
         gc = request.POST["gc"]
@@ -104,11 +105,19 @@ def result(request):
         dpf = request.POST["dpf"]
         age = request.POST["age"]
 
-        input_data = []
+        BASE_DIR = Path(__file__).resolve().parent.parent
+        model = joblib.load(BASE_DIR / "algorithm/algorithm/diabetes_prediction.joblib")
+        input_data = [pg, gc, bp, st, ins, bmi, dpf, age]
+        predictions = model.predict([input_data])
 
-        model = joblib.load("./algorithm/diabetes_prediction.joblib")
+        if predictions[0] == 0:
+            msg = "The person is is not diabetic"
+        else:
+            msg = "The person is diabetic"
 
-    return render(request, "diabetes/result.html")
+        context = {"msg": msg}
+
+    return render(request, "diabetes/result.html", context)
 
 
 def logout(request):
